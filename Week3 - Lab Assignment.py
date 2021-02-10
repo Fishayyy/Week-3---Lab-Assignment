@@ -1,8 +1,9 @@
 '''
 Lab 3
 '''
-
+### LINKS FOR ADDITIONAL HELP ###
 # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+# https://appdividend.com/2019/02/01/python-scikit-learn-tutorial-for-beginners-with-example/
 
 ######### Part 1 ###########
 
