@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from  sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, f1_score
 
 ######### Part 1 ###########
 
@@ -28,7 +28,7 @@ df = pd.read_csv("iris-data-1.csv")
 # YOUR CODE GOES HERE
 y = df.species
 x = df.drop('species', axis=1)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
         
 '''    
     3) Use KNeighborsClassifier from scikit-learn package. Train a KKN classifier using your training dataset  (K = 3, Euclidean distance).   
@@ -55,6 +55,10 @@ print(classification_report(y_test, y_predict))
 '''
 
 # YOUR CODE GOES HERE
+
+print("micro-F1score: ", f1_score(y_test, y_predict, average='micro'))
+print("macro-F1score: ", f1_score(y_test, y_predict, average='macro'))
+print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 
 '''    
     6) Repeat Q3, Q4, and Q5 for "manhattan" distance function
