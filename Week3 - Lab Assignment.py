@@ -7,7 +7,6 @@ Lab 3
 
 ######### Part 1 ###########
 
-
 '''
     1) Download the iris-data-1 from Canvas, use pandas.read_csv to load it.
 
