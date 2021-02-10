@@ -1,11 +1,16 @@
 '''
 Lab 3
 '''
-### LINKS FOR ADDITIONAL HELP ###
-# https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
-# https://appdividend.com/2019/02/01/python-scikit-learn-tutorial-for-beginners-with-example/
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from  sklearn.metrics import classification_report, confusion_matrix
 
 ######### Part 1 ###########
+
 
 '''
     1) Download the iris-data-1 from Canvas, use pandas.read_csv to load it.
@@ -13,20 +18,27 @@ Lab 3
 '''
 # YOUR CODE GOES HERE
 
+df = pd.read_csv("iris-data-1.csv")
 
 '''
     2) Split your data into test set(%30) and train set(%70) randomly. (Hint: you can use scikit-learn package tools for doing this)
     
+
 '''
-# YOUR CODE GOES HERE   
-    
+# YOUR CODE GOES HERE
+y = df.species
+x = df.drop('species', axis=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
         
 '''    
     3) Use KNeighborsClassifier from scikit-learn package. Train a KKN classifier using your training dataset  (K = 3, Euclidean distance).   
     
 '''
 # YOUR CODE GOES HERE  
+# I am confused on Euclidean distance? :P
 
+knc = KNeighborsClassifier(n_neighbors=3)
+knc.fit(x_train, y_train)
 
 '''   
     4) Test your classifier (Hint: use predict method) and report the performance (report accuracy, recall, precision, and F1score). (Hint: use classification_report from scikit learn)
@@ -34,7 +46,11 @@ Lab 3
 
 # YOUR CODE GOES HERE
 
+y_predict = knc.predict(x_test)
+print(classification_report(y_test, y_predict))
+
 '''   
+
     5) report micro-F1score, macro-F1score, and weighted F1-score.
 '''
 
