@@ -1,6 +1,9 @@
 '''
 Lab 3
 '''
+
+import pandas as pd
+
 ### LINKS FOR ADDITIONAL HELP ###
 # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 # https://appdividend.com/2019/02/01/python-scikit-learn-tutorial-for-beginners-with-example/
@@ -12,7 +15,7 @@ Lab 3
 
 '''
 # YOUR CODE GOES HERE
-
+iris1 = pd.read_csv("iris-data-1.csv")
 
 '''
     2) Split your data into test set(%30) and train set(%70) randomly. (Hint: you can use scikit-learn package tools for doing this)
