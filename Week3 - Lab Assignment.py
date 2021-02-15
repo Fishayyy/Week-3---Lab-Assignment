@@ -8,6 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, f1_score
+from sklearn.linear_model import LogisticRegression
 
 ######### Part 1 ###########
 
@@ -37,7 +38,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
 # YOUR CODE GOES HERE  
 # I am confused on Euclidean distance? :P
 
-knc = KNeighborsClassifier(n_neighbors=3)
+knc = KNeighborsClassifier(n_neighbors=3, metric='euclidean')
 knc.fit(x_train, y_train)
 
 '''   
@@ -55,10 +56,13 @@ print(classification_report(y_test, y_predict))
 '''
 
 # YOUR CODE GOES HERE
-
-print("micro-F1score: ", f1_score(y_test, y_predict, average='micro'))
-print("macro-F1score: ", f1_score(y_test, y_predict, average='macro'))
-print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
+euMicro = f1_score(y_test, y_predict, average='micro')
+euMacro = f1_score(y_test, y_predict, average='macro')
+euWeighted = f1_score(y_test, y_predict, average='weighted')
+print("micro-F1score: ", euMicro)
+print("macro-F1score: ", euMacro)
+print("weighted F1-score: ", euWeighted)
+print("\n")
 
 '''    
     6) Repeat Q3, Q4, and Q5 for "manhattan" distance function
@@ -66,18 +70,73 @@ print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 '''
 # YOUR CODE GOES HERE
 
+knc = KNeighborsClassifier(n_neighbors=3, metric="manhattan")
+knc.fit(x_train, y_train)
+
+y_predict = knc.predict(x_test)
+print(classification_report(y_test, y_predict))
+
+maMicro = f1_score(y_test, y_predict, average='micro')
+maMacro = f1_score(y_test, y_predict, average='macro')
+maWeighted = f1_score(y_test, y_predict, average='weighted')
+print("micro-F1score: ", maMicro)
+print("macro-F1score: ", maMacro)
+print("weighted F1-score: ", maWeighted)
+print("\n")
 
 '''   
     7) Compare your results in Q5 and Q6.
 
 '''
 # YOUR CODE GOES HERE
-
-
+print("===========================================================================================")
+print("EUCLIDEAN MICRO, MACRO, WEIGHTED: ", euMicro, euMacro, euWeighted)
+print("MANHATTAN MICRO, MACRO, WEIGHTED: ", maMicro, maMacro, maWeighted)
+print("\nDIFFERENCE IN VALUES MICRO, MACRO, WEIGHTED: ")
+print(abs(euMicro - maMicro), abs(euMacro - maMacro), abs(euWeighted - maWeighted))
+print("===========================================================================================\n")
 '''
     8) Repeat Q3, Q4, Q5, Q6, and Q7 for K = 11.
 '''
 # YOUR CODE GOES HERE
+
+'''euclidean'''
+
+knc = KNeighborsClassifier(n_neighbors=11, metric='euclidean')
+knc.fit(x_train, y_train)
+
+y_predict = knc.predict(x_test)
+print(classification_report(y_test, y_predict))
+
+euMicro = f1_score(y_test, y_predict, average='micro')
+euMacro = f1_score(y_test, y_predict, average='macro')
+euWeighted = f1_score(y_test, y_predict, average='weighted')
+print("micro-F1score: ", euMicro)
+print("macro-F1score: ", euMacro)
+print("weighted F1-score: ", euWeighted)
+print("\n")
+
+''' manhattan '''
+knc = KNeighborsClassifier(n_neighbors=3, metric="manhattan")
+knc.fit(x_train, y_train)
+
+y_predict = knc.predict(x_test)
+print(classification_report(y_test, y_predict))
+
+maMicro = f1_score(y_test, y_predict, average='micro')
+maMacro = f1_score(y_test, y_predict, average='macro')
+maWeighted = f1_score(y_test, y_predict, average='weighted')
+print("micro-F1score: ", maMicro)
+print("macro-F1score: ", maMacro)
+print("weighted F1-score: ", maWeighted)
+print("\n")
+
+print("===========================================================================================")
+print("EUCLIDEAN MICRO, MACRO, WEIGHTED: ", euMicro, euMacro, euWeighted)
+print("MANHATTAN MICRO, MACRO, WEIGHTED: ", maMicro, maMacro, maWeighted)
+print("\nDIFFERENCE IN VALUES MICRO, MACRO, WEIGHTED: ")
+print(abs(euMicro - maMicro), abs(euMacro - maMacro), abs(euWeighted - maWeighted))
+print("===========================================================================================\n")
 
 
 ######### Part 2 ###########
@@ -87,6 +146,11 @@ print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 '''
 # YOUR CODE GOES HERE
 
+df = pd.read_csv("iris-data-1.csv")
+
+y = df.species
+x = df.drop('species', axis=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
 
 '''
     1) Train a KKN classifier using your training dataset  (K = 7, Euclidean distance). 
@@ -98,6 +162,8 @@ print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 '''
 # YOUR CODE GOES HERE
 
+knc = KNeighborsClassifier(n_neighbors=7)
+m=LogisticRegression()
 
 
 ######### Part 3 ###########
