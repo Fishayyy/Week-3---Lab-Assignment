@@ -9,6 +9,8 @@ from sklearn.metrics import classification_report, f1_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 
+RANDOM_SEED = 69
+
 ######### Part 1 ###########
 
 
@@ -28,14 +30,13 @@ df = pd.read_csv("iris-data-1.csv")
 # YOUR CODE GOES HERE
 y = df.species
 x = df.drop('species', axis=1)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=RANDOM_SEED)
         
 '''    
     3) Use KNeighborsClassifier from scikit-learn package. Train a KKN classifier using your training dataset  (K = 3, Euclidean distance).   
     
 '''
 # YOUR CODE GOES HERE  
-# I am confused on Euclidean distance? :P
 
 knc = KNeighborsClassifier(n_neighbors=3, metric='euclidean')
 knc.fit(x_train, y_train)
@@ -45,7 +46,6 @@ knc.fit(x_train, y_train)
 '''
 
 # YOUR CODE GOES HERE
-
 y_predict = knc.predict(x_test)
 print(classification_report(y_test, y_predict))
 
@@ -149,7 +149,7 @@ df = pd.read_csv("iris-data-1.csv")
 
 y = df.species
 x = df.drop('species', axis=1)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=RANDOM_SEED)
 
 '''
     1) Train a KKN classifier using your training dataset  (K = 7, Euclidean distance). 
@@ -182,7 +182,7 @@ df = pd.read_csv("iris-data-1.csv")
 
 y = df.species
 x = df.drop('species', axis=1)
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.7)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=RANDOM_SEED)
 
 '''
     1) Use DecisionTreeClassifier from scikit-learn package. Train a DT classifier using your training dataset  (criterion='entropy', splitter= 'best'). 
