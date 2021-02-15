@@ -3,6 +3,10 @@ Lab 3
 '''
 
 import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report, f1_score
 
 ### LINKS FOR ADDITIONAL HELP ###
 # https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
@@ -22,33 +26,48 @@ iris1 = pd.read_csv("iris-data-1.csv")
     
 '''
 # YOUR CODE GOES HERE   
-    
+y = iris1.species
+x = iris1.drop('species', axis=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
         
 '''    
     3) Use KNeighborsClassifier from scikit-learn package. Train a KKN classifier using your training dataset  (K = 3, Euclidean distance).   
     
 '''
 # YOUR CODE GOES HERE  
+knc = KNeighborsClassifier(n_neighbors=3,p=2,metric='euclidean')
+knc.fit(x_train, y_train)
 
 
 '''   
     4) Test your classifier (Hint: use predict method) and report the performance (report accuracy, recall, precision, and F1score). (Hint: use classification_report from scikit learn)
 '''
-
 # YOUR CODE GOES HERE
+y_predict = knc.predict(x_test)
+print(classification_report(y_test, y_predict))
 
 '''   
     5) report micro-F1score, macro-F1score, and weighted F1-score.
 '''
-
 # YOUR CODE GOES HERE
+print("micro-F1score: ", f1_score(y_test, y_predict, average='micro'))
+print("macro-F1score: ", f1_score(y_test, y_predict, average='macro'))
+print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 
 '''    
     6) Repeat Q3, Q4, and Q5 for "manhattan" distance function
 
 '''
 # YOUR CODE GOES HERE
+knc2 = KNeighborsClassifier(n_neighbors=3,p=1,metric='manhattan')
+knc2.fit(x_train, y_train)
 
+y_predict = knc2.predict(x_test)
+print(classification_report(y_test, y_predict))
+
+print("micro-F1score: ", f1_score(y_test, y_predict, average='micro'))
+print("macro-F1score: ", f1_score(y_test, y_predict, average='macro'))
+print("weighted F1-score: ", f1_score(y_test, y_predict, average='weighted'))
 
 '''   
     7) Compare your results in Q5 and Q6.
